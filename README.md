@@ -1,6 +1,73 @@
 # flutter_ecommerce
 
-## Assignment Questions
+## Assignement 8
+
+### 1.What is the purpose of const in Flutter? Explain the advantages of using const in Flutter code. When should we use const, and when should it not be used?
+
+The `const` keyword in Flutter is used to define immutable widgets, ensuring that they don’t change after they're created. By marking a widget as `const`, we optimize our app's performance by reducing rebuilds and memory usage.
+
+So it's adavantagouse to use const as a way to increase performance, `const` widgets are only created once and can be reused, reducing the work Flutter has to do and unnecessary widget buildings.
+
+#### When to Use `const`:
+
+- we should use `const` when a widget and its children do not depend on dynamic values or external state changes.
+
+#### When Not to Use `const`:
+
+- We should using `const` if the widget’s state or content will change during the lifecycle of the app.
+
+
+### 2.Explain and compare the usage of Column and Row in Flutter. Provide example implementations of each layout widget!
+
+The `Column` and `Row` are layout widgets used to align multiple widgets vertically and horizontally, respectively.
+
+#### Example
+
+- `Column` widget (arrange its children vertically, from top to bottom )
+
+```dart
+
+Column(
+  children: [
+    Text("Item 1"),
+    Text("Item 2"),
+    Text("Item 3"),
+  ],
+)
+```
+
+- `Row` widget (arranges its children horizontally, from left to right.)
+
+```dart
+Row(
+  children: [
+    Icon(Icons.star),
+    Text("Starred"),
+  ],
+)
+```
+
+#### Illustration
+
+![alt text](1_3fFhf0jp9KfulswqM4HbRA.png)
+
+### 3.List the input elements you used on the form page in this assignment. Are there other Flutter input elements you didn’t use in this assignment? Explain
+
+In the assignment, I used `TextFormField` to enter the name, amount, and description. Each TextFormField includes validation logic to ensure proper data input.
+
+-> Other Flutter Input Elements that I didn't used:
+
+- `DropdownButton`: For selecting options from a dropdown list.
+- `Switch`: For binary toggle input (on/off).
+- `Slider`: For selecting a value along a continuous range.
+    Checkbox: For toggling a true/false condition.
+
+I didn't use these elements because the `TextFormField` was enough for what it's requested. I fmaybe we have to choose among a list or a 2 choices option we can use the `Slider` or the `Switch` widget.
+
+### 4. How do you set the theme within a Flutter application to ensure consistency? Did you implement a theme in your application?
+
+
+## Assignment 7
 
 ### 1. Explain what are stateless widgets and stateful widgets, and explain the difference between them
 
