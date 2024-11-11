@@ -66,6 +66,11 @@ I didn't use these elements because the `TextFormField` was enough for what it's
 
 ### 4. How do you set the theme within a Flutter application to ensure consistency? Did you implement a theme in your application?
 
+In Flutter, themes can be set at the root of the app using the ThemeData widget within the MaterialApp configuration. Yes, a theme was implemented in this application, to set the primary color for the app’s AppBar and button styles.
+
+### 5.How do you manage navigation in a multi-page Flutter application?
+
+In a multi-page Flutter application, navigation is typically managed using Flutter’s Navigator widget, which provides stack-based routing to navigate between screens.
 
 ## Assignment 7
 
