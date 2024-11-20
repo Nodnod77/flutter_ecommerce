@@ -52,7 +52,7 @@ class LeftDrawer extends StatelessWidget {
   ),
   ListTile(
     leading: const Icon(Icons.add),
-    title: const Text('Add Product'),
+    title: const Text('ADD PRODUCT'),
     // Redirection part to MoodEntryFormPage
     onTap: () {
       Navigator.pushReplacement(

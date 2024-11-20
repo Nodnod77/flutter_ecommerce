@@ -36,16 +36,19 @@ class ItemCard extends StatelessWidget {
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(SnackBar(
-                content: Text("You pressed the ${item.name} button!")));
-
+                content: Text("You pressed the ${item.name} button!!!")));
+              print ( item.name );
           // Navigate to the appropriate route (depending on the button type)
-          if (item.name == "Add product") {
+          if (item.name == "ADD PRODUCT") {
+             print("Add Product");
+          }
+          if (item.name == "ADD PRODUCT") {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => const ProductEntryFormPage()),
               );
           }
-          else if (item.name == "View Products") {
+          else if (item.name == "View Product") {
               Navigator.push(context,
                   MaterialPageRoute(
                       builder: (context) => const ProductEntryPage()
