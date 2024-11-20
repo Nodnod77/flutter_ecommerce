@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:e_commerce/screens/menu.dart';
-import 'package:e_commerce/screens/entry_form.dart';
+import 'package:e_commerce/screens/product_entryform.dart';
 
 class LeftDrawer extends StatelessWidget {
   const LeftDrawer({super.key});
@@ -51,14 +51,14 @@ class LeftDrawer extends StatelessWidget {
     },
   ),
   ListTile(
-    leading: const Icon(Icons.mood),
-    title: const Text('Add Mood'),
+    leading: const Icon(Icons.add),
+    title: const Text('Add Product'),
     // Redirection part to MoodEntryFormPage
     onTap: () {
       Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => EntryFormPage(),
+            builder: (context) => const ProductEntryFormPage(),
           ));
     },
   ),

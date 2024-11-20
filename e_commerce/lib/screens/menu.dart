@@ -8,8 +8,8 @@ class MyHomePage extends StatelessWidget {
     final String className = 'PBP '; // Class
     MyHomePage({super.key});
   final List<ItemHomepage> items = [
-         ItemHomepage("View Mood", Icons.mood),
-         ItemHomepage("Add Mood", Icons.add),
+         ItemHomepage("View Product", Icons.view_list),
+         ItemHomepage("Add Product", Icons.add),
          ItemHomepage("Logout", Icons.logout),
      ];
     @override
@@ -18,7 +18,7 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(  
         title: const Text(
-          'E commerce app',
+          'E commerce',
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
@@ -51,7 +51,7 @@ class MyHomePage extends StatelessWidget {
                   const Padding(
                     padding: EdgeInsets.only(top: 16.0),
                     child: Text(
-                      'Welcome to E commerce app',
+                      'Welcome to e commerce app',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 18.0,

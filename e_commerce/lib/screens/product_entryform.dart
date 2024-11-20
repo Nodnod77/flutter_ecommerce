@@ -1,29 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
+import 'package:e_commerce/screens/menu.dart';
+import 'dart:convert';
 
-class EntryFormPage extends StatefulWidget {
-  const EntryFormPage({super.key});
+class ProductEntryFormPage extends StatefulWidget {
+  const ProductEntryFormPage({super.key});
 
   @override
-  State<EntryFormPage> createState() => _EntryFormPageState();
+  State<ProductEntryFormPage> createState() => _ProductEntryFormPageState();
 }
 
-class _EntryFormPageState extends State<EntryFormPage> {
+class _ProductEntryFormPageState extends State<ProductEntryFormPage> {
   final _formKey = GlobalKey<FormState>();
-  String _name= "";
-	int _amount = 0;
+  String _name = "";
 	String _description = "";
+	int _price = 0;
   @override
   Widget build(BuildContext context) {
+
+    final request = context.watch<CookieRequest>();
+
     return Scaffold(
   appBar: AppBar(
     title: const Center(
       child: Text(
-        'Add a new product',
+        'Add  a new brand product !',
       ),
     ),
     backgroundColor: Theme.of(context).colorScheme.primary,
     foregroundColor: Colors.white,
   ),
+  // TODO: Add the created drawer here
   body: Form(
     key: _formKey,
     child: SingleChildScrollView(
@@ -47,41 +55,12 @@ class _EntryFormPageState extends State<EntryFormPage> {
             },
             validator: (String? value) {
               if (value == null || value.isEmpty) {
-                return "Name cannot be empty!";
+                return "The name cannot be empty!";
               }
               return null;
             },
           ),
         ),
-        Padding(
-  padding: const EdgeInsets.all(8.0),
-  child: TextFormField(
-    decoration: InputDecoration(
-      hintText: "Amout",
-      labelText: "Amout",
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(5.0),
-      ),
-    ),
-    onChanged: (String? value) {
-      setState(() {
-        _amount = int.tryParse(value!) ?? 0;
-      });
-    },
-    validator: (String? value) {
-      if (value == null || value.isEmpty) {
-        return "The amount cannot be empty!";
-      }
-      if (int.tryParse(value) == null) {
-        return "The amount must be a number!";
-      }
-      if (int.parse(value) <= 0) {
-        return "The amount must be greater than 0!";
-      }
-      return null;
-    },
-  ),
-),
         Padding(
   padding: const EdgeInsets.all(8.0),
   child: TextFormField(
@@ -105,47 +84,74 @@ class _EntryFormPageState extends State<EntryFormPage> {
     },
   ),
 ),
-
+Padding(
+  padding: const EdgeInsets.all(8.0),
+  child: TextFormField(
+    decoration: InputDecoration(
+      hintText: "Price",
+      labelText: "Price",
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(5.0),
+      ),
+    ),
+    onChanged: (String? value) {
+      setState(() {
+        _price = int.tryParse(value!) ?? 0;
+      });
+    },
+    validator: (String? value) {
+      if (value == null || value.isEmpty) {
+        return "The price cannot be empty!";
+      }
+      if (int.tryParse(value) == null) {
+        return "The price must be a number!";
+      }
+      return null;
+    },
+  ),
+),
 Align(
   alignment: Alignment.bottomCenter,
   child: Padding(
     padding: const EdgeInsets.all(8.0),
     child: ElevatedButton(
   style: ButtonStyle(
-    backgroundColor: WidgetStateProperty.all(
+    backgroundColor: MaterialStateProperty.all(
         Theme.of(context).colorScheme.primary),
   ),
-  onPressed: () {
+  onPressed: () async {
     if (_formKey.currentState!.validate()) {
-      showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: const Text('Mood successfully saved'),
-            content: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('Name: $_name'),
-                  Text('Amout: $_amount'),
-                  Text('Description: $_description'),
-                ],
-              ),
-            ),
-            actions: [
-              TextButton(
-                child: const Text('OK'),
-                onPressed: () {
-                  Navigator.pop(context);
-                  _formKey.currentState!.reset();
-                },
-              ),
-            ],
-          );
-        },
-      );
+        // Send request to Django and wait for the response
+        // TODO: Change the URL to your Django app's URL. Don't forget to add the trailing slash (/) if needed.
+        final response = await request.postJson(
+            "http://127.0.0.1:8000/create-flutter/",
+            jsonEncode(<String, String>{
+                'name': _name,
+                'price': _price.toString(),
+                'description': _description,
+            // TODO: Adjust the fields with your project
+            }),
+        );
+        if (context.mounted) {
+            if (response['status'] == 'success') {
+                ScaffoldMessenger.of(context)
+                    .showSnackBar(const SnackBar(
+                content: Text("New product has saved successfully!"),
+                ));
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => MyHomePage()),
+                );
+            } else {
+                ScaffoldMessenger.of(context)
+                    .showSnackBar(const SnackBar(
+                    content:
+                        Text("Something went wrong, please try again."),
+                ));
+            }
+        }
     }
-  },
+},
   child: const Text(
     "Save",
     style: TextStyle(color: Colors.white),
