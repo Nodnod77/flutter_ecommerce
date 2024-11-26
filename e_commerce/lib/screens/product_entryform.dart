@@ -116,7 +116,7 @@ Align(
     padding: const EdgeInsets.all(8.0),
     child: ElevatedButton(
   style: ButtonStyle(
-    backgroundColor: MaterialStateProperty.all(
+    backgroundColor: WidgetStateProperty.all(
         Theme.of(context).colorScheme.primary),
   ),
   onPressed: () async {
