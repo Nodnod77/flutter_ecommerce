@@ -44,10 +44,10 @@ class Fields {
     });
 
     factory Fields.fromJson(Map<String, dynamic> json) => Fields(
-        name: json["name"],
+        name: json["data1"],
         time: DateTime.parse(json["time"]),
-        description: json["description"],
-        price: json["price"],
+        description: json["data2"],
+        price: json["data3"],
         user: json["user"],
     );
 

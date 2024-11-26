@@ -19,13 +19,14 @@ class _ProductEntryPageState extends State<ProductEntryPage> {
     // Decoding the response into JSON
     var data = response;
 
- 
+   
     List<ProductEntry> listProduct = [];
     for (var d in data) {
       if (d != null) {
         listProduct.add(ProductEntry.fromJson(d));
       }
     }
+    print(listProduct);
     return listProduct;
     }
   
